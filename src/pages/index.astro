@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import ImageGallery from '../components/ImageGallery.astro';
+import CalloutsColumns from '../components/CalloutsColumns.astro';
+
+const builds = await getCollection('builds');
+const featured =
+	builds.find((b) => b.data.featured) ??
+	builds.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))[0];
+
+const featuredRendered = featured ? await render(featured) : null;
+---
+
+<Layout title={`Custom Handcrafted Electric Guitars | george guitars`} description={featured?.data.intro}>
+	{featured ? (
+		<>
+			<h1>{featured.data.title}</h1>
+			{featured.data.intro ? <p>{featured.data.intro}</p> : null}
+
+			<ImageGallery images={featured.data.images} />
+
+			{featured.data.specs?.length ? (
+				<>
+					<h2>Specifications</h2>
+					<ul>
+						{featured.data.specs.map((s) => (
+							<li>{s}</li>
+						))}
+					</ul>
+				</>
+			) : null}
+
+			{featuredRendered ? <featuredRendered.Content /> : null}
+
+			{featured.data.callouts?.length ? (
+				<>
+					<hr />
+					<CalloutsColumns callouts={featured.data.callouts} />
+				</>
+			) : null}
+		</>
+	) : (
+		<>
+			<h1>george guitars</h1>
+			<p>No builds found yet.</p>
+		</>
+	)}
+</Layout>

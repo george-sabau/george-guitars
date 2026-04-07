@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+
+const builds = (await getCollection('builds'))
+	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+---
+
+<nav class="buildNav" aria-label="Builds">
+	{builds.map((b) => (
+		<a
+			class="buildLink"
+			href={b.data.featured ? '/' : `/${b.data.slug}`}
+			aria-current={
+				(currentPath === '/' && b.data.featured) || currentPath === `/${b.data.slug}`
+					? 'page'
+					: undefined
+			}
+		>
+			{b.data.slug}
+		</a>
+	))}
+</nav>
+
+<style>
+	.buildNav {
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		font-size: 12px;
+	}
+
+	.buildLink {
+		color: #6b7280;
+	}
+
+	.buildLink:hover {
+		color: #111827;
+	}
+
+	.buildLink[aria-current='page'] {
+		color: #111827;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+</style>
+

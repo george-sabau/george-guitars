@@ -1,0 +1,199 @@
+---
+// Lightweight, no-dependency cookie consent.
+// Stores preferences in localStorage; no cookies are set by this component itself.
+---
+
+<div id="cookie-consent" class="cc" hidden>
+	<div class="ccCard">
+		<div class="ccTitle">Cookie Policy</div>
+		<p class="ccText">
+			This site uses cookies. Further information on the types of cookies can be found under the
+			respective categories. Individual cookies can also be activated there. The cookie settings
+			can be adjusted at any time using the link in the footer of this website.
+		</p>
+
+		<div class="ccOptions">
+			<label class="ccOption">
+				<input type="checkbox" checked disabled />
+				<span>Strictly necessary</span>
+			</label>
+			<label class="ccOption">
+				<input id="cc-performance" type="checkbox" />
+				<span>Performance</span>
+			</label>
+		</div>
+
+		<div class="ccActions">
+			<button class="ccBtn" id="cc-accept-selected" type="button">Accept only selected</button>
+			<button class="ccBtn" id="cc-reject" type="button">Reject all</button>
+			<button class="ccBtnPrimary" id="cc-accept-all" type="button">Accept all</button>
+		</div>
+	</div>
+</div>
+
+<script is:inline>
+	(() => {
+		const KEY = 'gg_cookie_consent_v1';
+
+		function getStored() {
+			try {
+				const raw = localStorage.getItem(KEY);
+				return raw ? JSON.parse(raw) : null;
+			} catch {
+				return null;
+			}
+		}
+
+		function store(value) {
+			try {
+				localStorage.setItem(KEY, JSON.stringify(value));
+			} catch {
+				// ignore
+			}
+		}
+
+		function close() {
+			const root = document.getElementById('cookie-consent');
+			if (root) root.hidden = true;
+		}
+
+		function open() {
+			const root = document.getElementById('cookie-consent');
+			if (root) root.hidden = false;
+		}
+
+		function init() {
+			const existing = getStored();
+			if (!existing) open();
+
+			// Use event delegation (capture) so clicks always work even if the DOM
+			// is replaced or the script runs before individual nodes exist.
+			document.addEventListener(
+				'click',
+				(e) => {
+					const t = e.target;
+					if (!(t instanceof Element)) return;
+
+					const btn = t.closest('button');
+					if (!(btn instanceof HTMLButtonElement)) return;
+
+					if (btn.id === 'cc-accept-all') {
+						e.preventDefault();
+						store({ necessary: true, performance: true, updatedAt: new Date().toISOString() });
+						close();
+					}
+
+					if (btn.id === 'cc-reject') {
+						e.preventDefault();
+						store({ necessary: true, performance: false, updatedAt: new Date().toISOString() });
+						close();
+					}
+
+					if (btn.id === 'cc-accept-selected') {
+						e.preventDefault();
+						const perf = document.getElementById('cc-performance');
+						store({
+							necessary: true,
+							performance: perf instanceof HTMLInputElement ? Boolean(perf.checked) : false,
+							updatedAt: new Date().toISOString(),
+						});
+						close();
+					}
+				},
+				true
+			);
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', init, { once: true });
+		} else {
+			init();
+		}
+	})();
+</script>
+
+<style>
+	.cc {
+		position: fixed;
+		inset: 0;
+		display: grid;
+		place-items: end;
+		padding: 16px;
+		background: rgba(17, 24, 39, 0.35);
+		backdrop-filter: blur(8px);
+		z-index: 50;
+	}
+
+	.ccCard {
+		width: min(720px, 100%);
+		background: white;
+		border: 1px solid rgba(229, 231, 235, 1);
+		border-radius: 14px;
+		padding: 16px;
+		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+	}
+
+	.ccTitle {
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+	}
+
+	.ccText {
+		margin: 0 0 12px;
+		color: #4b5563;
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	.ccOptions {
+		display: flex;
+		gap: 16px;
+		flex-wrap: wrap;
+		margin: 12px 0;
+	}
+
+	.ccOption {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: #111827;
+		font-size: 14px;
+	}
+
+	.ccActions {
+		display: flex;
+		gap: 10px;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+		margin-top: 10px;
+	}
+
+	.ccBtn,
+	.ccBtnPrimary {
+		border-radius: 10px;
+		padding: 10px 12px;
+		font-size: 14px;
+		border: 1px solid #e5e7eb;
+		background: white;
+		color: #111827;
+		cursor: pointer;
+	}
+
+	.ccBtn:hover {
+		background: #f9fafb;
+	}
+
+	.ccBtnPrimary {
+		background: #111827;
+		color: white;
+		border-color: #111827;
+	}
+
+	.ccBtnPrimary:hover {
+		background: #0b1220;
+	}
+</style>
+

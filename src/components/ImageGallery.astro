@@ -1,0 +1,186 @@
+---
+type Img = { src: string; alt?: string };
+
+const { images = [] } = Astro.props as { images: Img[] };
+if (!Array.isArray(images) || images.length === 0) {
+	// Render nothing
+}
+
+const galleryId = `gg-gallery-${crypto.randomUUID()}`;
+---
+
+{Array.isArray(images) && images.length ? (
+	<section class="wrap" aria-label="Gallery" data-gg-gallery={galleryId}>
+		<div class="frame">
+			<button class="nav prev" type="button" aria-label="Previous image">‹</button>
+			<div class="track" tabindex="0">
+				{images.map((img, idx) => (
+					<figure class="slide" data-index={idx}>
+						<img src={img.src} alt={img.alt ?? ''} loading={idx === 0 ? 'eager' : 'lazy'} decoding="async" />
+					</figure>
+				))}
+			</div>
+			<button class="nav next" type="button" aria-label="Next image">›</button>
+		</div>
+
+		<div class="thumbs" aria-label="Thumbnails">
+			{images.map((img, idx) => (
+				<button class="thumb" type="button" aria-label={`Open image ${idx + 1}`} data-index={idx}>
+					<img src={img.src} alt={img.alt ?? ''} loading="lazy" decoding="async" />
+				</button>
+			))}
+		</div>
+	</section>
+) : null}
+
+<script is:inline>
+	(() => {
+		const root = document.currentScript?.previousElementSibling;
+		if (!(root instanceof HTMLElement)) return;
+		if (!root.matches('[data-gg-gallery]')) return;
+
+		const track = root.querySelector('.track');
+		const prev = root.querySelector('.prev');
+		const next = root.querySelector('.next');
+		const thumbs = root.querySelector('.thumbs');
+		if (!(track instanceof HTMLElement)) return;
+
+		function slideWidth() {
+			const first = track.querySelector('.slide');
+			return first instanceof HTMLElement ? first.getBoundingClientRect().width : track.getBoundingClientRect().width;
+		}
+
+		function getIndex() {
+			const w = slideWidth() || 1;
+			return Math.round(track.scrollLeft / w);
+		}
+
+		function scrollToIndex(i) {
+			const w = slideWidth() || 1;
+			track.scrollTo({ left: i * w, behavior: 'smooth' });
+		}
+
+		prev?.addEventListener('click', () => scrollToIndex(Math.max(0, getIndex() - 1)));
+		next?.addEventListener('click', () => scrollToIndex(getIndex() + 1));
+
+		thumbs?.addEventListener('click', (e) => {
+			const t = e.target;
+			if (!(t instanceof Element)) return;
+			const b = t.closest('button[data-index]');
+			if (!(b instanceof HTMLButtonElement)) return;
+			const idx = Number(b.dataset.index);
+			if (!Number.isFinite(idx)) return;
+			scrollToIndex(idx);
+		});
+	})();
+</script>
+
+<style>
+	.wrap {
+		margin: 16px 0 10px;
+	}
+
+	.frame {
+		position: relative;
+		border: 1px solid rgba(15, 23, 42, 0.10);
+		border-radius: 14px;
+		overflow: hidden;
+		background: white;
+	}
+
+	.track {
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.track:focus {
+		outline: 2px solid rgba(15, 23, 42, 0.18);
+		outline-offset: 2px;
+	}
+
+	.slide {
+		margin: 0;
+		flex: 0 0 100%;
+		scroll-snap-align: start;
+		background: white;
+	}
+
+	.slide img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+	}
+
+	.nav {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 42px;
+		height: 42px;
+		border-radius: 999px;
+		border: 1px solid rgba(15, 23, 42, 0.10);
+		background: rgba(251, 251, 250, 0.85);
+		color: rgba(15, 23, 42, 0.85);
+		display: grid;
+		place-items: center;
+		cursor: pointer;
+		backdrop-filter: blur(8px);
+	}
+
+	.nav:hover {
+		background: rgba(251, 251, 250, 0.95);
+		color: rgba(15, 23, 42, 1);
+	}
+
+	.prev {
+		left: 10px;
+	}
+	.next {
+		right: 10px;
+	}
+
+	.thumbs {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 10px;
+		margin-top: 10px;
+	}
+
+	.thumb {
+		border: 1px solid rgba(15, 23, 42, 0.10);
+		border-radius: 12px;
+		padding: 0;
+		overflow: hidden;
+		background: white;
+		cursor: pointer;
+	}
+
+	.thumb img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+	}
+
+	@media (max-width: 900px) {
+		.thumbs {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 520px) {
+		.thumbs {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+		.nav {
+			display: none;
+		}
+	}
+</style>
+

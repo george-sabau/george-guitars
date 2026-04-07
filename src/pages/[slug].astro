@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import ImageGallery from '../components/ImageGallery.astro';
+import CalloutsColumns from '../components/CalloutsColumns.astro';
+
+export async function getStaticPaths() {
+  const builds = await getCollection('builds');
+  return builds
+    .filter((b) => !b.data.featured)
+    .map((b) => ({ params: { slug: b.data.slug }, props: { build: b } }));
+}
+
+const { build } = Astro.props;
+const { Content } = await render(build);
+---
+
+<Layout title={`${build.data.title} | george guitars`} description={build.data.intro}>
+	<h1>{build.data.title}</h1>
+	{build.data.intro ? <p>{build.data.intro}</p> : null}
+
+	<ImageGallery images={build.data.images} />
+
+	{build.data.specs?.length ? (
+		<>
+			<h2>Specifications</h2>
+			<ul>
+				{build.data.specs.map((s) => (
+					<li>{s}</li>
+				))}
+			</ul>
+		</>
+	) : null}
+
+	<Content />
+
+	{build.data.callouts?.length ? (
+		<>
+			<hr />
+			<CalloutsColumns callouts={build.data.callouts} />
+		</>
+	) : null}
+</Layout>
+

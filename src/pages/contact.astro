@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import contact from '../content/contact.json';
+---
+
+<Layout title="Contact | george guitars">
+	<h1>Contact</h1>
+	<p>
+		<a href={`mailto:${contact.email}`}>{contact.email}</a>
+	</p>
+
+	<hr />
+
+	<nav class="legal" aria-label="Legal">
+		<a href="/imprint/">Imprint</a>
+		<a href="/privacy-policy/">Privacy Policy</a>
+		<a href="/cookie-settings/">Cookie Settings</a>
+	</nav>
+</Layout>
+
+<style>
+	.legal {
+		display: flex;
+		justify-content: flex-end;
+		gap: 18px;
+		padding-right: 16px;
+		font-size: 14px;
+	}
+</style>
+

@@ -1,0 +1,78 @@
+---
+type Callout = {
+	heading: string;
+	text: string;
+	image?: { src: string; alt?: string };
+};
+
+const { callouts = [] } = Astro.props as { callouts: Callout[] };
+const items = Array.isArray(callouts) ? callouts.slice(0, 3) : [];
+---
+
+{items.length ? (
+	<section class="cols" aria-label="Details">
+		{items.map((c) => (
+			<article class="col">
+				{c.image?.src ? (
+					<div class="imgWrap">
+						<img src={c.image.src} alt={c.image.alt ?? ''} loading="lazy" decoding="async" />
+					</div>
+				) : null}
+				<div class="txt">
+					<p class="title">
+						<strong>{c.heading}</strong>
+					</p>
+					<p class="body">{c.text}</p>
+				</div>
+			</article>
+		))}
+	</section>
+) : null}
+
+<style>
+	.cols {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+		margin-top: 18px;
+	}
+
+	.col {
+		background: white;
+		border: 1px solid rgba(15, 23, 42, 0.10);
+		border-radius: 14px;
+		overflow: hidden;
+	}
+
+	.imgWrap {
+		aspect-ratio: 1 / 1;
+		background: white;
+	}
+
+	.imgWrap img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.txt {
+		padding: 14px 14px 16px;
+	}
+
+	.title {
+		margin: 0 0 8px;
+		color: rgba(15, 23, 42, 0.95);
+	}
+
+	.body {
+		margin: 0;
+	}
+
+	@media (max-width: 900px) {
+		.cols {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
