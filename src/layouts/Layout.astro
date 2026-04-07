@@ -1,5 +1,6 @@
 ---
 import SiteNav from '../components/SiteNav.astro';
+import { withBase } from '../utils/withBase';
 
 type Props = {
   title?: string;
@@ -31,10 +32,10 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 		<div class="site">
 			<header class="header">
 				<nav class="nav">
-					<a class="brand" href="/">george guitars</a>
+					<a class="brand" href={withBase('/')}>george guitars</a>
 					<div class="navLinks">
 						<SiteNav />
-						<a href="/contact">contact</a>
+						<a href={withBase('/contact')}>contact</a>
 					</div>
 				</nav>
 			</header>
@@ -51,7 +52,7 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 							>instagram</a
 						>
 						<a href="https://linktr.ee/dtee_em" target="_blank" rel="noreferrer">linktree</a>
-						<a href="/contact">contact</a>
+						<a href={withBase('/contact')}>contact</a>
 					</div>
 				</div>
 			</footer>

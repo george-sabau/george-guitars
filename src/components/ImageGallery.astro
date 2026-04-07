@@ -6,6 +6,13 @@ if (!Array.isArray(images) || images.length === 0) {
 	// Render nothing
 }
 
+function withBaseIfRootPath(src: string) {
+	const base = import.meta.env.BASE_URL ?? '/';
+	const baseNoTrail = base.replace(/\/+$/, '');
+	if (!src.startsWith('/')) return src;
+	return `${baseNoTrail}${src}`;
+}
+
 const galleryId = `gg-gallery-${crypto.randomUUID()}`;
 ---
 
@@ -18,7 +25,12 @@ const galleryId = `gg-gallery-${crypto.randomUUID()}`;
 			<div class="track" tabindex="0">
 				{images.map((img, idx) => (
 					<figure class="slide" data-index={idx}>
-						<img src={img.src} alt={img.alt ?? ''} loading={idx === 0 ? 'eager' : 'lazy'} decoding="async" />
+						<img
+							src={withBaseIfRootPath(img.src)}
+							alt={img.alt ?? ''}
+							loading={idx === 0 ? 'eager' : 'lazy'}
+							decoding="async"
+						/>
 					</figure>
 				))}
 			</div>
@@ -30,7 +42,7 @@ const galleryId = `gg-gallery-${crypto.randomUUID()}`;
 		<div class="thumbs" aria-label="Thumbnails">
 			{images.map((img, idx) => (
 				<button class="thumb" type="button" aria-label={`Open image ${idx + 1}`} data-index={idx}>
-					<img src={img.src} alt={img.alt ?? ''} loading="lazy" decoding="async" />
+					<img src={withBaseIfRootPath(img.src)} alt={img.alt ?? ''} loading="lazy" decoding="async" />
 				</button>
 			))}
 		</div>

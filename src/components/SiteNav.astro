@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { withBase } from '../utils/withBase';
 
 const builds = (await getCollection('builds'))
 	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
@@ -11,7 +12,7 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 	{builds.map((b) => (
 		<a
 			class="buildLink"
-			href={b.data.featured ? '/' : `/${b.data.slug}`}
+			href={b.data.featured ? withBase('/') : withBase(`/${b.data.slug}`)}
 			aria-current={
 				(currentPath === '/' && b.data.featured) || currentPath === `/${b.data.slug}`
 					? 'page'
