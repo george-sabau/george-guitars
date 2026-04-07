@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://www.george-guitars.com',
+	site: 'https://george-sabau.github.io',
+	base: '/george-guitars',
 	integrations: [sitemap()],
 });
