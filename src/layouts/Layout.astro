@@ -16,7 +16,6 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" href="/favicon.ico" />
 		<title>{title}</title>
 		{description ? <meta name="description" content={description} /> : null}
 		<link rel="canonical" href={canonical} />
@@ -47,7 +46,13 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 			<footer class="footer">
 				<div class="footerInner">
 					<span>© {new Date().getFullYear()} george guitars</span>
-					<a href="/contact">contact</a>
+					<div class="footerLinks">
+						<a href="https://www.instagram.com/downtoearthexplorersband/" target="_blank" rel="noreferrer"
+							>instagram</a
+						>
+						<a href="https://linktr.ee/dtee_em" target="_blank" rel="noreferrer">linktree</a>
+						<a href="/contact">contact</a>
+					</div>
 				</div>
 			</footer>
 		</div>
@@ -124,6 +129,7 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 	}
 	.navLinks a {
 		color: var(--muted);
+		transition: color 0.2s;
 	}
 	.navLinks a:hover {
 		color: var(--fg);
@@ -200,8 +206,15 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 		font-size: 12px;
 		color: var(--muted);
 	}
+	.footerLinks {
+		display: flex;
+		gap: 14px;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+	}
 	.footerInner a {
 		color: var(--muted);
+		transition: color 0.2s;
 	}
 	.footerInner a:hover {
 		color: var(--fg);
