@@ -80,3 +80,9 @@ From a historical standpoint, this project marks the evolution to model number 3
 Andi was granted full creative freedom, allowing him to explore any direction he desired for the design and paint job. While the primary colours of \"blue & yellow\" were predetermined, I refrained from imposing any further constraints. The outcome exceeded expectations, with Andi's doodle art adding a delightful touch to the final product.
 
 From a technical standpoint, this project aligns closely with my previous guitar endeavours showcased on this website. As such, there are minimal additional details to delve into here. Nevertheless, the journey continues, and I am eagerly anticipating my next venture, which may come to fruition later this year. As I've mentioned before, upon completing 8-10 guitars, an exhibition will be in the cards.
+
+# blue-yellow
+
+https://storage.e.jimdo.com/cdn-cgi/image/quality=85,fit=scale-down,format=auto,trim=71;293;122;250,width=480,height=480/image/457767272/6f39dab7-31b5-4a92-9c48-0e592eb7af1a.jpg
+https://storage.e.jimdo.com/cdn-cgi/image/quality=85,fit=scale-down,format=auto,trim=202;0;248;0,width=800,height=800/image/457767277/d83faae8-af68-4093-9e2d-eaadc5b85cdc.jpg
+https://storage.e.jimdo.com/cdn-cgi/image/quality=85,fit=scale-down,format=auto,trim=110;0;303;0,width=768,height=800/image/457767280/b40f8d4d-4bff-441d-81ba-555e6e8dc3d3.jpg

@@ -12,7 +12,9 @@ const galleryId = `gg-gallery-${crypto.randomUUID()}`;
 {Array.isArray(images) && images.length ? (
 	<section class="wrap" aria-label="Gallery" data-gg-gallery={galleryId}>
 		<div class="frame">
-			<button class="nav prev" type="button" aria-label="Previous image">‹</button>
+			<button class="nav prev" type="button" aria-label="Previous image">
+				<span aria-hidden="true">‹</span>
+			</button>
 			<div class="track" tabindex="0">
 				{images.map((img, idx) => (
 					<figure class="slide" data-index={idx}>
@@ -20,7 +22,9 @@ const galleryId = `gg-gallery-${crypto.randomUUID()}`;
 					</figure>
 				))}
 			</div>
-			<button class="nav next" type="button" aria-label="Next image">›</button>
+			<button class="nav next" type="button" aria-label="Next image">
+				<span aria-hidden="true">›</span>
+			</button>
 		</div>
 
 		<div class="thumbs" aria-label="Thumbnails">
@@ -120,28 +124,41 @@ const galleryId = `gg-gallery-${crypto.randomUUID()}`;
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		width: 42px;
-		height: 42px;
+		z-index: 2;
+		width: 52px;
+		height: 52px;
 		border-radius: 999px;
 		border: 1px solid rgba(15, 23, 42, 0.10);
-		background: rgba(251, 251, 250, 0.85);
-		color: rgba(15, 23, 42, 0.85);
+		background: rgba(255, 255, 255, 0.88);
+		color: rgba(15, 23, 42, 0.92);
 		display: grid;
 		place-items: center;
 		cursor: pointer;
 		backdrop-filter: blur(8px);
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	.nav:hover {
-		background: rgba(251, 251, 250, 0.95);
+		background: rgba(255, 255, 255, 0.96);
 		color: rgba(15, 23, 42, 1);
 	}
 
+	.nav span {
+		display: inline-block;
+		font-size: 28px;
+		line-height: 1;
+		transform: translateY(-1px);
+	}
+
+	.nav:active {
+		transform: translateY(-50%) scale(0.98);
+	}
+
 	.prev {
-		left: 10px;
+		left: 14px;
 	}
 	.next {
-		right: 10px;
+		right: 14px;
 	}
 
 	.thumbs {
