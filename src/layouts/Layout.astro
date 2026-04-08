@@ -1,5 +1,6 @@
 ---
-import SiteNav from '../components/SiteNav.astro';
+import BurgerBuildNav from '../components/BurgerBuildNav.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import { withBase } from '../utils/withBase';
 
 type Props = {
@@ -20,6 +21,8 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 		<title>{title}</title>
 		{description ? <meta name="description" content={description} /> : null}
 		<link rel="canonical" href={canonical} />
+		<!-- Prevent browser auto-requesting /favicon.ico (site uses no favicon). -->
+		<link rel="icon" href="data:," />
 
 		<meta property="og:site_name" content="george guitars" />
 		<meta property="og:type" content="website" />
@@ -33,10 +36,7 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 			<header class="header">
 				<nav class="nav">
 					<a class="brand" href={withBase('/')}>george guitars</a>
-					<div class="navLinks">
-						<SiteNav />
-						<a href={withBase('/contact')}>contact</a>
-					</div>
+					<BurgerBuildNav />
 				</nav>
 			</header>
 
@@ -53,10 +53,13 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 						>
 						<a href="https://linktr.ee/dtee_em" target="_blank" rel="noreferrer">linktree</a>
 						<a href={withBase('/contact')}>contact</a>
+						<a href={withBase('/cookie-settings')}>cookie settings</a>
 					</div>
 				</div>
 			</footer>
 		</div>
+
+		<CookieConsent />
 	</body>
 </html>
 
@@ -69,7 +72,7 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 		--rule: rgba(15, 23, 42, 0.10);
 		--link: #0f172a;
 		--linkHover: rgba(15, 23, 42, 0.60);
-		--max: 920px;
+		--max: 1000px;
 	}
 
 	html,
@@ -119,6 +122,7 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 	.brand {
 		font-weight: 500;
 		letter-spacing: -0.02em;
+		font-size: 1.15em;
 	}
 
 	.navLinks {
@@ -148,23 +152,22 @@ const canonical = new URL(Astro.url.pathname, import.meta.env.SITE);
 	h3 {
 		line-height: 1.2;
 		letter-spacing: -0.02em;
+		font-weight: 500;
 	}
 
 	h1 {
-		font-size: 28px;
+		font-size: 22px;
 		margin: 0 0 12px;
 	}
 	h2 {
 		font-size: 18px;
 		margin: 26px 0 10px;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
+		letter-spacing: -0.01em;
 	}
 	h3 {
 		font-size: 16px;
 		margin: 18px 0 8px;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
+		letter-spacing: -0.01em;
 	}
 
 	p {

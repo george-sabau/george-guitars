@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+import { withBase } from '../utils/withBase';
+
+const builds = (await getCollection('builds'))
+	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+	.map((b) => ({
+		slug: b.data.slug,
+		href: b.data.featured ? withBase('/') : withBase(`/${b.data.slug}`),
+		label: b.data.slug === 'blue-yellow' ? 'Blue & Yellow' : b.data.slug[0].toUpperCase() + b.data.slug.slice(1),
+	}));
+---
+
+<div class="burger" data-burger-root>
+	<button class="burgerBtn" type="button" aria-label="Menu" aria-expanded="false" data-burger-btn>
+		<span class="lines" aria-hidden="true"></span>
+	</button>
+
+	<div class="panel" hidden data-burger-panel>
+		<nav class="menu" aria-label="Builds">
+			{builds.map((b) => (
+				<a class="item" href={b.href}>{b.label}</a>
+			))}
+		</nav>
+	</div>
+</div>
+
+<script is:inline>
+	(() => {
+		const root = document.currentScript?.previousElementSibling;
+		if (!(root instanceof HTMLElement)) return;
+		if (!root.matches('[data-burger-root]')) return;
+
+		const btn = root.querySelector('[data-burger-btn]');
+		const panel = root.querySelector('[data-burger-panel]');
+		if (!(btn instanceof HTMLButtonElement)) return;
+		if (!(panel instanceof HTMLElement)) return;
+
+		function close() {
+			panel.hidden = true;
+			btn.setAttribute('aria-expanded', 'false');
+		}
+
+		function toggle() {
+			const open = panel.hidden;
+			panel.hidden = !open;
+			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+		}
+
+		btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			toggle();
+		});
+
+		document.addEventListener('click', (e) => {
+			const t = e.target;
+			if (!(t instanceof Node)) return;
+			if (!root.contains(t)) close();
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') close();
+		});
+	})();
+</script>
+
+<style>
+	.burger {
+		position: relative;
+	}
+
+	.burgerBtn {
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		border: 1px solid rgba(15, 23, 42, 0.12);
+		background: rgba(255, 255, 255, 0.5);
+		backdrop-filter: blur(8px);
+		cursor: pointer;
+		display: grid;
+		place-items: center;
+	}
+
+	.burgerBtn:hover {
+		background: rgba(255, 255, 255, 0.75);
+	}
+
+	.lines {
+		position: relative;
+		display: inline-block;
+		width: 18px;
+		height: 2px;
+		background: rgba(15, 23, 42, 0.85);
+		border-radius: 2px;
+	}
+	.lines::before,
+	.lines::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		width: 18px;
+		height: 2px;
+		background: rgba(15, 23, 42, 0.85);
+		border-radius: 2px;
+	}
+	.lines::before {
+		top: -6px;
+	}
+	.lines::after {
+		top: 6px;
+	}
+
+	.panel {
+		position: absolute;
+		top: calc(100% + 10px);
+		right: 0;
+		width: 220px;
+		background: rgba(255, 255, 255, 0.92);
+		border: 1px solid rgba(15, 23, 42, 0.12);
+		border-radius: 14px;
+		padding: 10px;
+		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14);
+		backdrop-filter: blur(10px);
+		z-index: 10;
+	}
+
+	.menu {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.item {
+		padding: 10px 10px;
+		border-radius: 10px;
+		color: rgba(15, 23, 42, 0.78);
+		transition: color 0.2s, background 0.2s;
+	}
+	.item:hover {
+		color: rgba(15, 23, 42, 1);
+		background: rgba(15, 23, 42, 0.06);
+	}
+</style>
+

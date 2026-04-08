@@ -1,6 +1,6 @@
 ---
 slug: "blue-yellow"
-title: "Fender-style Custom Telecaster \"Blue & Yellow\""
+title: "Custom Tele \"Blue & Yellow\""
 intro: "The \"Blue & Yellow\" Fender-style Custom Telecaster represents a significant moment for me, as it celebrates my collaboration with the incredibly talented artist, Andi. At just 13 years old, Andi poured his creativity into crafting doodle art that adorns nearly every inch of the guitar's body and neck."
 specs:
   - "Telecaster-style Body, Maple"
@@ -18,17 +18,17 @@ specs:
   - "Strings thickness .010-.046"
   - "Handcrafted in Vienna"
 callouts:
-  - heading: "GENUINE FENDER PARTS"
+  - heading: "Genuine Fender Parts"
     text: "all over the place, yet only where it matters. Carefully selected, modified, assembled and set up to fit your playing style."
     image:
       src: "/assets/builds/blue-yellow/9156913c-f760-45f3-8797-fe03fd390e8c.jpg"
       alt: "Genuine Fender parts — Blue & Yellow"
-  - heading: "COLOURS & PAINT JOB"
+  - heading: "Colours & Paint Job"
     text: "The body color is an elegant, vintage pastel pink with a smooth, skin-like matte finish. The structure of the mahogany wood shows its fibers right through the layers of paint. The color job includes a grounding or primer layer (grey), the covering color (pink), and a sealing layer of matte wood finish."
     image:
       src: "/assets/builds/blue-yellow/d83faae8-af68-4093-9e2d-eaadc5b85cdc.jpg"
       alt: "Colours & paint job — Blue & Yellow"
-  - heading: "PERSONALIZED BODY SHAPE"
+  - heading: "Personalized Body Shape"
     text: "The modeled body comfortably fits the anatomy of your body and is shaped according to your playing style. Therefore, a sharper angle enables pleasant and frictionless forearm positioning. On the other hand, the body back is carved to fit your upper body."
     image:
       src: "/assets/builds/blue-yellow/3b2f02f4-db84-4938-b97e-0d4fd3618b8a.jpg"
