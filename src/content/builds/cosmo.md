@@ -37,7 +37,3 @@ images:
   - src: "/assets/builds/cosmo/bae600e9-f60b-4c8e-9e0a-99a53c9ec4b1.jpg"
     alt: "Cosmo — build photo"
 ---
-
-## Behind the scenes
-
-Some impressions from the building process ...
