@@ -24,17 +24,17 @@ callouts:
   - heading: "Genuine Fender Parts"
     text: "all over the place, yet only where it matters. Carefully selected, modified, assembled and set up to fit your playing style."
     image:
-      src: "/assets/builds/one/f68b9021-af39-4577-9988-a72481e78a6d.jpg"
+      src: "/assets/builds/one/callout-1.png"
       alt: "Genuine Fender parts — One"
   - heading: "Colours & Paint Job"
     text: "The body color is an elegant, vintage pastel pink with a smooth, skin-like matte finish. The structure of the mahogany wood shows its fibers right through the layers of paint. The color job includes a grounding or primer layer (grey), the covering color (pink), and a sealing layer of matte wood finish."
     image:
-      src: "/assets/builds/one/706ff28f-f582-43aa-90df-c00905dc46f5.jpg"
+      src: "/assets/builds/one/callout-2.png"
       alt: "Colours & paint job — One"
   - heading: "Personalized Body Shape"
     text: "The modeled body comfortably fits the anatomy of your body and is shaped according to your playing style. Therefore, a sharper angle enables pleasant and frictionless forearm positioning. On the other hand, the body back is carved to fit your upper body."
     image:
-      src: "/assets/builds/one/25ac5c97-6b5c-41cc-829c-31c240154439.jpg"
+      src: "/assets/builds/one/callout-3.png"
       alt: "Personalized body shape — One"
 sourcePath: "/one"
 featured: false

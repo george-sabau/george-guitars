@@ -21,17 +21,17 @@ callouts:
   - heading: "Genuine Fender Parts"
     text: "all over the place, yet only where it matters. Carefully selected, modified, assembled and set up to fit your playing style."
     image:
-      src: "/assets/builds/blue-yellow/9156913c-f760-45f3-8797-fe03fd390e8c.jpg"
+      src: "/assets/builds/blue-yellow/callout-1.png"
       alt: "Genuine Fender parts — Blue & Yellow"
   - heading: "Colours & Paint Job"
     text: "The body color is an elegant, vintage pastel pink with a smooth, skin-like matte finish. The structure of the mahogany wood shows its fibers right through the layers of paint. The color job includes a grounding or primer layer (grey), the covering color (pink), and a sealing layer of matte wood finish."
     image:
-      src: "/assets/builds/blue-yellow/d83faae8-af68-4093-9e2d-eaadc5b85cdc.jpg"
+      src: "/assets/builds/blue-yellow/callout-2.png"
       alt: "Colours & paint job — Blue & Yellow"
   - heading: "Personalized Body Shape"
     text: "The modeled body comfortably fits the anatomy of your body and is shaped according to your playing style. Therefore, a sharper angle enables pleasant and frictionless forearm positioning. On the other hand, the body back is carved to fit your upper body."
     image:
-      src: "/assets/builds/blue-yellow/3b2f02f4-db84-4938-b97e-0d4fd3618b8a.jpg"
+      src: "/assets/builds/blue-yellow/callout-3.png"
       alt: "Personalized body shape — Blue & Yellow"
 sourcePath: "/"
 featured: true
