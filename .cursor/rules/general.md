@@ -19,6 +19,15 @@
   - Prefer **defensive event handling** (works even if event target is not an Element).
   - Prefer **simple DOM + minimal JS**, no extra deps.
 
+## Project status (session memory)
+- Treat `PROJECT_STATUS.md` as the source of truth for multi-day context.
+- At the start of any new session or substantial task:
+  - Read `PROJECT_STATUS.md` first.
+  - Summarize: today’s goal, next 3 actions, known issues/gotchas.
+- Before finishing a work session:
+  - Update `PROJECT_STATUS.md` with a new Daily log entry (Focus/Done/Notes/Next).
+  - Refresh “Current goal (today)” + “Next 3 actions”.
+
 ## Cookie consent (important)
 - Consent state is stored in **`localStorage`**.
 - If the user reports “banner not visible” during iteration:
