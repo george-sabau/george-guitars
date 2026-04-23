@@ -1,12 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import { withBase } from '../utils/withBase';
 
 const builds = (await getCollection('builds'))
 	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
 	.map((b) => ({
 		slug: b.data.slug,
-		href: b.data.featured ? withBase('/') : withBase(`/${b.data.slug}`),
+		href: b.data.featured ? '/' : `/${b.data.slug}`,
 		label: b.data.slug === 'blue-yellow' ? 'Blue & Yellow' : b.data.slug[0].toUpperCase() + b.data.slug.slice(1),
 	}));
 ---

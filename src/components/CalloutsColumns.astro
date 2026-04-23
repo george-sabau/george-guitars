@@ -7,13 +7,6 @@ type Callout = {
 
 const { callouts = [] } = Astro.props as { callouts: Callout[] };
 const items = Array.isArray(callouts) ? callouts.slice(0, 3) : [];
-
-function withBaseIfRootPath(src: string) {
-	const base = import.meta.env.BASE_URL ?? '/';
-	const baseNoTrail = base.replace(/\/+$/, '');
-	if (!src.startsWith('/')) return src;
-	return `${baseNoTrail}${src}`;
-}
 ---
 
 {items.length ? (
@@ -22,7 +15,7 @@ function withBaseIfRootPath(src: string) {
 			<article class="col">
 				{c.image?.src ? (
 					<div class="imgWrap">
-						<img src={withBaseIfRootPath(c.image.src)} alt={c.image.alt ?? ''} loading="lazy" decoding="async" />
+						<img src={c.image.src} alt={c.image.alt ?? ''} loading="lazy" decoding="async" />
 					</div>
 				) : null}
 				<div class="txt">

@@ -1,7 +1,6 @@
 ---
 // Lightweight, no-dependency cookie consent.
 // Stores preferences in localStorage; no cookies are set by this component itself.
-import { withBase } from '../utils/withBase';
 ---
 
 <div id="cookie-consent" class="cc" hidden>
@@ -10,7 +9,7 @@ import { withBase } from '../utils/withBase';
 			<div class="ccTitle">Cookie policy</div>
 			<p class="ccText">
 				This site uses cookies. You can accept or reject cookies. You can change your decision any time via
-				<a href={withBase('/cookie-settings')}>Cookie settings</a>.
+				<a href="/cookie-settings">Cookie settings</a>.
 			</p>
 		</div>
 

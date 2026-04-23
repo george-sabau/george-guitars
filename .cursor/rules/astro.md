@@ -6,10 +6,9 @@
 - Avoid new dependencies unless clearly necessary.
 
 ## Routing + base path
-- Assume `import.meta.env.BASE_URL` may be non-root (e.g. `/george-guitars/`).
-- For internal links, prefer existing `withBase(...)` helper.
-- For public assets:
-  - Prefer referencing as `/assets/...` and, where needed, use a base-aware helper like `withBaseIfRootPath`.
+- This site is hosted at the **domain root** (no base path like `/george-guitars/`).
+- For internal links, use root-absolute paths like `/contact`, `/imprint/`, etc.
+- For public assets, reference as `/assets/...` (from `public/assets/...`).
 
 ## Content collections
 - Build pages come from content collections (e.g. `src/content/builds/*.md`).

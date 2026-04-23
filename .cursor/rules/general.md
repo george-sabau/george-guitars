@@ -6,9 +6,8 @@
 - Prefer small, targeted changes over big refactors.
 
 ## Project constraints (must follow)
-- **Base path aware**: this site may run under a base like `/george-guitars/`.
-  - Use existing `withBase(...)` helper for internal links.
-  - Avoid hardcoding root-absolute paths unless intentionally public and base-safe.
+- **Root hosted**: this site is hosted at the domain root (no base path like `/george-guitars/`).
+  - Use root-absolute internal links like `/contact` and asset paths like `/assets/...`.
 - **No favicon**: do not add favicon assets/links.
   - If browsers auto-request `/favicon.ico`, neutralize with a blank icon link (data URI).
 - **Images live in `public/assets/...`** and must be referenced as `/assets/...` (base-safe where needed).
@@ -53,7 +52,6 @@
   - If adjusting widths/sizing, do it in small increments and keep previous feel.
 
 ## “Don’t regress” checklist (common mistakes)
-- Don’t break base-path routing (links must work under `/george-guitars/`).
 - Don’t reintroduce external Jimdo/Cloudflare image URLs into markdown bodies.
 - Don’t accidentally duplicate section headings (e.g. “About this project”).
 - Don’t change the cookie banner layout/behavior unless explicitly requested.

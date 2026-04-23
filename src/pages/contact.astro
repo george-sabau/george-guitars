@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import contact from '../content/contact.json';
-import { withBase } from '../utils/withBase';
 ---
 
 <Layout title="Contact | george guitars">
@@ -13,9 +12,9 @@ import { withBase } from '../utils/withBase';
 	<hr />
 
 	<nav class="legal" aria-label="Legal">
-		<a href={withBase('/imprint/')}>Imprint</a>
-		<a href={withBase('/privacy-policy/')}>Privacy Policy</a>
-		<a href={withBase('/cookie-settings/')}>Cookie Settings</a>
+		<a href="/imprint/">Imprint</a>
+		<a href="/privacy-policy/">Privacy Policy</a>
+		<a href="/cookie-settings/">Cookie Settings</a>
 	</nav>
 </Layout>
 

@@ -34,6 +34,8 @@ URLs:
 
 This site outputs static files (`dist/`) and can be deployed to Netlify/Vercel/GitHub Pages.
 
+It is currently configured for **root hosting** on `https://www.george-guitars.com/` (no `/george-guitars/` base path).
+
 ### Netlify
 - **Build command**: `npm run build`
 - **Publish directory**: `dist`
